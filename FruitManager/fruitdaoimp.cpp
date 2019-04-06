@@ -9,7 +9,7 @@ QSqlQuery FruitDaoImp::selectFruits(){
     DBHelper *helper = DBHelper::getInstance();
     helper->connectDatabase();
     QSqlQuery query;
-    query.prepare("select * from fruit_tb ");
+    query.prepare("select * from om_entrepot ");
     query.exec();
     helper->disconnectDatabase();
     return query;
@@ -19,7 +19,7 @@ QSqlQuery FruitDaoImp::selectFruitByName(QString fruitName){
     DBHelper *helper = DBHelper::getInstance();
     helper->connectDatabase();
     QSqlQuery query;
-    query.prepare("select fruitName ,fruitPrice, fruitNum from fruit_tb where fruitName = :fruitName;");
+    query.prepare("select fruitName ,fruitPrice, fruitNum from om_entrepot where fruitName = :fruitName;");
     query.bindValue(":fruitName",fruitName);
     query.exec();
     helper->disconnectDatabase();
@@ -41,7 +41,7 @@ QSqlQuery FruitDaoImp::selectFruitByNum(double fruitNum){
     DBHelper *helper = DBHelper::getInstance();
     helper->connectDatabase();
     QSqlQuery query;
-    query.prepare("select fruitName ,fruitPrice, fruitNum from fruit_tb where fruitNum = :fruitNum;");
+    query.prepare("select fruitName ,fruitPrice, fruitNum from om_entrepot where fruitNum = :fruitNum;");
     query.bindValue(":fruitNum",fruitNum);
     query.exec();
     helper->disconnectDatabase();
@@ -53,7 +53,7 @@ bool FruitDaoImp::insertFruit(const Fruit &fruit) {
     helper->connectDatabase();
     QSqlQuery query;
     bool ret;
-    query.prepare("insert into fruit_tb(fruitName,fruitPrice,fruitNum)"
+    query.prepare("insert into om_entrepot(fruitName,fruitPrice,fruitNum)"
                   "values(:fruitName,:fruitPrice,:fruitNum);");
     query.bindValue(":fruitName",fruit.getFruitName());
     query.bindValue(":fruitPrice",fruit.getFruitPrice());
@@ -72,7 +72,7 @@ bool FruitDaoImp::deleteFruit(const QString &fruitName) {
     helper->connectDatabase();
     QSqlQuery query;
     bool ret;
-    query.prepare("delete from fruit_tb where fruitName = :fruitName");
+    query.prepare("delete from om_entrepot where fruitName = :fruitName");
     query.bindValue(":fruitName",fruitName);
     ret = query.exec();
 
@@ -88,14 +88,17 @@ bool FruitDaoImp::updateFruit(const Fruit &fruit) {
     helper->connectDatabase();
     QSqlQuery query;
     bool ret;
-    query.prepare("update fruit_tb "
-                  "set fruitName = :fruitName,"
-                  "fruitPrice = :fruitPrice,"
-                  "fruitNum = fruitNum)"
+    query.prepare("update om_entrepot "
+                  "set fruitName = :fruitName, "
+                  "fruitPrice = :fruitPrice, "
+                  "fruitNum = fruitNum "
                   "where fruitName = :fruitName");
     query.bindValue(":fruitName",fruit.getFruitName());
     query.bindValue(":fruitPrice",fruit.getFruitPrice());
-    query.bindValue(":fruitNum",fruit.getFruitPrice());
+    query.bindValue(":fruitNum",fruit.getFruitNum());
+    qDebug() << fruit.getFruitName() << "|"
+           << fruit.getFruitPrice() << "|"
+           << fruit.getFruitNum() << "|";
     ret = query.exec();
 
     if(ret){qDebug()<<"修改成功";}

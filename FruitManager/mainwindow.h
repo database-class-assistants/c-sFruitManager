@@ -3,6 +3,7 @@
 
 #include "user.h"
 #include <QMainWindow>
+#include <QDebug>
 #include <login.h>
 
 namespace Ui {

@@ -6,12 +6,12 @@ DBHelper::DBHelper()
 {
     db = QSqlDatabase::addDatabase("QMYSQL");
     db.setHostName("localhost");
+    db.setDatabaseName("dboms");
     db.setUserName("root");
-    db.setPassword("long");
+    db.setPassword("123456");
 }
 void DBHelper::connectDatabase()
 {
-    db.setDatabaseName("fruit");
     qDebug()<<"true";
     bool ret = db.open();
     if(ret){qDebug()<<"open db success";}
