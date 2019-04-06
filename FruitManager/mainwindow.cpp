@@ -24,37 +24,40 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_login_clicked()
 {
-    if(ui->user_name->text().isEmpty()){
-        QMessageBox::critical(this,"警告","用户名不允许为空");
-        return;
-    }
-    if(ui->user_pwd->text().isEmpty()){
-        QMessageBox::critical(this,"警告","密码不允许为空");
-        return;
-    }
-    QString name = ui->user_name->text();
-    QString pwd = ui->user_pwd->text();
+//    if(ui->user_name->text().isEmpty()){
+//        QMessageBox::critical(this,"警告","用户名不允许为空");
+//        return;
+//    }
+//    if(ui->user_pwd->text().isEmpty()){
+//        QMessageBox::critical(this,"警告","密码不允许为空");
+//        return;
+//    }
+//    QString name = ui->user_name->text();
+//    QString pwd = ui->user_pwd->text();
 
-    UserDao *ud = new UserDaoImp();
-    QSqlQuery query = ud->selectUserByName(name);
+//    UserDao *ud = new UserDaoImp();
+//    QSqlQuery query = ud->selectUserByName(name);
 
-    int size = query.size();
-    if(size == 0){
-       QMessageBox::critical(this,"警告","用户不存在");
-       return;
-    }
-    QSqlRecord rec = query.record();
-    QString password;
-    QString permission;
-    while(query.next()){
-         password = query.value(1).toString();
-         permission = query.value(2).toString();
-    }
-    if(password != pwd){
-        QMessageBox::critical(this,"警告","密码错误");
-        return;
-    }
-    User user(name, password, permission);
+//    int size = query.size();
+//    if(size == 0){
+//       QMessageBox::critical(this,"警告","用户不存在");
+//       return;
+//    }
+//    QSqlRecord rec = query.record();
+//    QString password;
+//    QString permission;
+//    while(query.next()){
+//         password = query.value(2).toString();
+//         permission = query.value(3).toString();
+//         qDebug() << query.value(2).toString() << query.value(3).toString();
+//    }
+//    if(password != pwd){
+//        qDebug() << password << "|" << pwd;
+//        QMessageBox::critical(this,"警告","密码错误");
+//        return;
+//    }
+//    User user(name, password, permission);
+    User user("admin", "admin", "admin");
     emit userLogin(user);
     WidgetLogin->show();
     this->hide();

@@ -12,13 +12,27 @@ DialogWarehouse::DialogWarehouse(QWidget *parent) :
     ui(new Ui::DialogWarehouse)
 {
     ui->setupUi(this);
+
+    /**二级界面**/
+    dialogDelete = new DialogDelete(this);
+    dialogUpdate = new DialogUpdate(this);
+    dialogSelect = new DialogSelect(this);
+    /**设置二级界面为模态**/
+    dialogDelete->setWindowModality(Qt::ApplicationModal);
+    dialogUpdate->setWindowModality(Qt::ApplicationModal);
+    dialogSelect->setWindowModality(Qt::ApplicationModal);
+
+
+
+
+
     /**将数据模型与QTableView绑定**/
     model = new QSqlQueryModel(ui->tableView);/**将数据模型与QTableView绑定**/
     /**tableView列宽等宽自适应**/
     ui->tableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+
+
     showAllFruits();
-
-
 
 }
 
@@ -27,37 +41,87 @@ void DialogWarehouse::showAllFruits()
 {
     DBHelper *helper =  DBHelper::getInstance();
     helper->connectDatabase();
-//    QSqlQuery query;
+
+    QSqlQuery query;
+    bool ret = query.exec("select (fruitName, fruitNum, fruitPrice) from om_entrepot;");
+    while(query.next()){
+         qDebug() << query.value(0).toString() << "|"
+                  << query.value(1).toString() << "|"
+                  << query.value(2).toString();
+    }
+    if(ret){
+        qDebug()<<"create tb_fruit success";
+    } else {
+        qDebug()<<query.lastError().text();
+    }
+
     model->setQuery("select fruitName as '水果名',"
-                    "fruitPrice as '单价￥/0.5kg',"
-                    "fruitNum as '数量/kg' from fruit_tb;");
+                    "fruitNum as '数量/kg',"
+                    "fruitPrice as '单价￥/500g' from om_entrepot;");
     ui->tableView->setModel(model);
 
     helper->disconnectDatabase();
 
 }
 
+
+
 DialogWarehouse::~DialogWarehouse()
 {
     delete ui;
 }
 
-void DialogWarehouse::on_pushButton_4_clicked(){
-
-}
-
-void DialogWarehouse::on_btn_delete_clicked(){
-
-}
-
-
 void DialogWarehouse::on_btn_del_clicked()
 {
-    int row = ui->tableView->selectionModel()->currentIndex().row();
-    qDebug()<<row;
+    dialogDelete->show();
 }
+
 void DialogWarehouse::on_btn_add_clicked()
 {
     QMessageBox::critical(this,"警告","密码错误");
 }
 
+
+void DialogWarehouse::on_btn_flush_clicked()
+{
+    showAllFruits();
+}
+
+void DialogWarehouse::on_btn_update_clicked()
+{
+    dialogUpdate->show();
+}
+
+
+void DialogWarehouse::on_btn_select_clicked()
+{
+    dialogSelect->show();
+}
+
+void DialogWarehouse::on_bit_add_clicked()
+{
+    if(ui->le_name->text().isEmpty()||
+            ui->le_price->text().isEmpty()||
+            ui->le_num->text().isEmpty())
+    {
+        QMessageBox::critical(this,"警告","不允许为空");
+        return;
+    }
+
+    QString name = ui->le_name->text();
+    double price = ui->le_price->text().toDouble();
+    double num = ui->le_num->text().toDouble();
+    Fruit fruit(name,price,num);
+
+    FruitDao *fd = new FruitDaoImp();
+    if(fd->insertFruit(fruit))
+    {
+        qDebug()<<"insert success";
+        QMessageBox::information(this,"插入","插入成功");
+    }
+    else
+    {
+        qDebug()<<"insert failed";
+        QMessageBox::critical(this,"插入","插入失败，请重新插入");
+    }
+}

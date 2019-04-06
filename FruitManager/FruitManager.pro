@@ -4,8 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
-QT       += sql
+QT       += core gui sql
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -32,6 +31,9 @@ SOURCES += \
     userdao.cpp \
     user.cpp \
     userdaoimp.cpp \
+    DialogDelete.cpp \
+    DialogUpdate.cpp \
+    DialogSelect.cpp \
     login.cpp \
     fruit.cpp \
     fruitdao.cpp \
@@ -44,12 +46,18 @@ HEADERS += \
     userdao.h \
     user.h \
     userdaoimp.h \
+    DialogDelete.h \
+    DialogUpdate.h \
+    DialogSelect.h \
     login.h \
     fruit.h \
     fruitdao.h \
     fruitdaoimp.h
 
 FORMS += \
-        mainwindow.ui \
     dialogwarehouse.ui \
-    login.ui
+    DialogDelete.ui \
+    DialogUpdate.ui \
+    DialogSelect.ui \
+    login.ui \
+    mainwindow.ui

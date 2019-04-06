@@ -13,7 +13,7 @@ QSqlQuery UserDaoImp::selectUserByName( QString name)
     helper->connectDatabase();
 
 
-    query.prepare("select * from user_tb where username = :name;");
+    query.prepare("select * from om_user where username = :name;");
     query.bindValue(":name",name);
 
     query.exec();
