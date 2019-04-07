@@ -39,7 +39,8 @@ SOURCES += \
     fruitdao.cpp \
     fruitdaoimp.cpp \
     dialoglack.cpp \
-    dialogsale.cpp
+    dialogsale.cpp \
+    dialogsaleitem.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -56,7 +57,8 @@ HEADERS += \
     fruitdao.h \
     fruitdaoimp.h \
     dialoglack.h \
-    dialogsale.h
+    dialogsale.h \
+    dialogsaleitem.h
 
 FORMS += \
     dialogwarehouse.ui \
@@ -66,4 +68,5 @@ FORMS += \
     login.ui \
     mainwindow.ui \
     dialoglack.ui \
-    dialogsale.ui
+    dialogsale.ui \
+    dialogsaleitem.ui
