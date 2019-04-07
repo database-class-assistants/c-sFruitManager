@@ -91,11 +91,13 @@ bool FruitDaoImp::updateFruit(const Fruit &fruit) {
     query.prepare("update om_entrepot "
                   "set fruitName = :fruitName, "
                   "fruitPrice = :fruitPrice, "
-                  "fruitNum = fruitNum "
+                  "fruitNum = :fruitNum, "
+                  "limited_number = :limitedNum "
                   "where fruitName = :fruitName");
     query.bindValue(":fruitName",fruit.getFruitName());
     query.bindValue(":fruitPrice",fruit.getFruitPrice());
     query.bindValue(":fruitNum",fruit.getFruitNum());
+    query.bindValue(":limitedNum",fruit.getLimitedNum());
     qDebug() << fruit.getFruitName() << "|"
            << fruit.getFruitPrice() << "|"
            << fruit.getFruitNum() << "|";

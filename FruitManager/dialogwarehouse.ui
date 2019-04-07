@@ -26,30 +26,45 @@
   <widget class="QWidget" name="gridLayoutWidget">
    <property name="geometry">
     <rect>
-     <x>160</x>
+     <x>60</x>
      <y>360</y>
-     <width>231</width>
-     <height>80</height>
+     <width>211</width>
+     <height>121</height>
     </rect>
    </property>
    <layout class="QGridLayout" name="gridLayout">
-    <item row="0" column="0">
-     <widget class="QLabel" name="lb_name">
+    <item row="2" column="1">
+     <widget class="QLineEdit" name="le_num">
       <property name="text">
-       <string>水果名</string>
+       <string/>
       </property>
      </widget>
-    </item>
-    <item row="1" column="1">
-     <widget class="QLineEdit" name="le_price"/>
-    </item>
-    <item row="0" column="1">
-     <widget class="QLineEdit" name="le_name"/>
     </item>
     <item row="1" column="0">
      <widget class="QLabel" name="lb_price">
       <property name="text">
        <string>单  价</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="1">
+     <widget class="QLineEdit" name="le_name">
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="1">
+     <widget class="QLineEdit" name="le_price">
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="0">
+     <widget class="QLabel" name="lb_name">
+      <property name="text">
+       <string>水果名</string>
       </property>
      </widget>
     </item>
@@ -59,9 +74,6 @@
        <string>数  量</string>
       </property>
      </widget>
-    </item>
-    <item row="2" column="1">
-     <widget class="QLineEdit" name="le_num"/>
     </item>
    </layout>
    <zorder>lb_num</zorder>
@@ -74,8 +86,8 @@
   <widget class="QPushButton" name="bit_add">
    <property name="geometry">
     <rect>
-     <x>240</x>
-     <y>450</y>
+     <x>330</x>
+     <y>440</y>
      <width>75</width>
      <height>23</height>
     </rect>
@@ -123,6 +135,32 @@
      </widget>
     </item>
    </layout>
+  </widget>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>300</x>
+     <y>380</y>
+     <width>54</width>
+     <height>12</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>警戒数量</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="le_limited">
+   <property name="geometry">
+    <rect>
+     <x>362</x>
+     <y>369</y>
+     <width>121</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
   </widget>
  </widget>
  <resources/>
