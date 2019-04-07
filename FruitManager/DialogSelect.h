@@ -15,6 +15,9 @@ class DialogSelect : public QDialog
 public:
     explicit DialogSelect(QWidget *parent = 0);
     ~DialogSelect();
+private slots:
+    void on_btn_select_clicked();
+
 private:
     Ui::DialogSelect *ui;
     QSqlQueryModel *model;
