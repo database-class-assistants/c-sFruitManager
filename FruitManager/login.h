@@ -5,6 +5,7 @@
 #include "user.h"
 #include "QString"
 #include "dialogwarehouse.h"
+#include "dialoglack.h"
 
 namespace Ui {
 class login;
@@ -22,11 +23,14 @@ public:
 private slots:
     void onUserLogin(const User &user);
 
-    void on_pushButton_clicked();
+    void on_btn_entrepot_clicked();
+
+    void on_btn_need_clicked();
 
 private:
     Ui::login *ui;
     DialogWarehouse *dialogWarehouse;
+    DialogLack *dialogLack;
 };
 
 #endif // LOGIN_H

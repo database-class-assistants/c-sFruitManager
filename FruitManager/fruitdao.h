@@ -17,7 +17,7 @@ public:
 
     virtual bool insertFruit(const Fruit &fruit) = 0;
     virtual bool deleteFruit(const QString &name) = 0;
-    virtual bool updateFruit(const Fruit &fruit) = 0;
+    virtual bool updateFruit(const Fruit &fruit, const QString & oldname) = 0;
     virtual ~FruitDao();
 };
 
