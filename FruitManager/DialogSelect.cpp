@@ -33,7 +33,7 @@ void DialogSelect::on_btn_select_clicked()
     helper->connectDatabase();
 
     QSqlQuery query;
-    query.prepare("select (fruitName, fruitNum, fruitPrice) from om_entrepot where fruitName = :name;");
+    query.prepare("select (fruitName, fruitNum, fruitPrice, limited_number) from om_entrepot where fruitName = :name;");
     query.bindValue(":fruitName", ui->le_select->text());
     bool ret = query.exec();
     while(query.next()){
@@ -49,9 +49,11 @@ void DialogSelect::on_btn_select_clicked()
 
     model->setQuery("select fruitName as '水果名',"
                     "fruitNum as '数量/kg',"
-                    "fruitPrice as '单价￥/500g' from om_entrepot where fruitName = " +
+                    "fruitPrice as '单价￥/500g', "
+                    "limited_number as '最低数量/kg'  from om_entrepot where fruitName = " +
                     ui->le_select->text() +
                     ";");
+
     ui->tableView->setModel(model);
 
     helper->disconnectDatabase();

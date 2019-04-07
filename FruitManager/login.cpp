@@ -7,9 +7,12 @@ login::login(QWidget *parent) :
     ui(new Ui::login)
 {
     ui->setupUi(this);
+
     dialogWarehouse = new DialogWarehouse(this);
+    dialogLack = new DialogLack();
+
     dialogWarehouse->setWindowModality(Qt::ApplicationModal);
-//    QObject::connect(this,SIGNAL(sigWarehouse(const Fruit &)),dialogWarehouse,SLOT(onSigWarehouse(const Fruit &)));
+    dialogLack->setWindowModality(Qt::ApplicationModal);
 }
 
 login::~login()
@@ -21,7 +24,12 @@ void login::onUserLogin(const User &user){
     ui->le_username->setText(user.getName());
 }
 
-void login::on_pushButton_clicked()
+void login::on_btn_entrepot_clicked()
 {
     dialogWarehouse->show();
+}
+
+void login::on_btn_need_clicked()
+{
+    dialogLack->show();
 }

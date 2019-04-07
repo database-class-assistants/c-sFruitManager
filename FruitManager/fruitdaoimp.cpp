@@ -83,7 +83,7 @@ bool FruitDaoImp::deleteFruit(const QString &fruitName) {
     return ret;
 }
 
-bool FruitDaoImp::updateFruit(const Fruit &fruit) {
+bool FruitDaoImp::updateFruit(const Fruit &fruit, const QString & oldname) {
     DBHelper *helper = DBHelper::getInstance();
     helper->connectDatabase();
     QSqlQuery query;
@@ -91,14 +91,18 @@ bool FruitDaoImp::updateFruit(const Fruit &fruit) {
     query.prepare("update om_entrepot "
                   "set fruitName = :fruitName, "
                   "fruitPrice = :fruitPrice, "
-                  "fruitNum = fruitNum "
-                  "where fruitName = :fruitName");
+                  "fruitNum = :fruitNum, "
+                  "limited_number = :limitedNum "
+                  "where fruitName = :oldname");
     query.bindValue(":fruitName",fruit.getFruitName());
     query.bindValue(":fruitPrice",fruit.getFruitPrice());
     query.bindValue(":fruitNum",fruit.getFruitNum());
+    query.bindValue(":limitedNum",fruit.getLimitedNum());
+    query.bindValue(":oldname",oldname);
     qDebug() << fruit.getFruitName() << "|"
            << fruit.getFruitPrice() << "|"
-           << fruit.getFruitNum() << "|";
+           << fruit.getFruitNum() << "|"
+           << fruit.getLimitedNum();
     ret = query.exec();
 
     if(ret){qDebug()<<"修改成功";}

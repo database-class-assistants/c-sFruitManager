@@ -20,7 +20,7 @@ public:
 
     bool insertFruit(const Fruit &fruit) ;
     bool deleteFruit(const QString &fruitName) ;
-    bool updateFruit(const Fruit &fruit) ;
+    bool updateFruit(const Fruit &fruit, const QString & oldname) ;
 };
 
 #endif // FRUITDAOIMP_H
