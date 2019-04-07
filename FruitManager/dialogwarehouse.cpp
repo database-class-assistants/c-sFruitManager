@@ -58,7 +58,7 @@ void DialogWarehouse::showAllFruits()
 
     model->setQuery("select fruitName as '水果名',"
                     "fruitNum as '数量/kg',"
-                    "fruitPrice as '单价￥/500g', "
+                    "fruitPrice as '最新单价￥/500g', "
                     "limited_number as '最低数量/kg' from om_entrepot;");
     ui->tableView->setModel(model);
 

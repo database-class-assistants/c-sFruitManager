@@ -10,9 +10,11 @@ login::login(QWidget *parent) :
 
     dialogWarehouse = new DialogWarehouse(this);
     dialogLack = new DialogLack();
+    dialogSale = new DialogSale();
 
     dialogWarehouse->setWindowModality(Qt::ApplicationModal);
     dialogLack->setWindowModality(Qt::ApplicationModal);
+    dialogSale->setWindowModality(Qt::ApplicationModal);
 }
 
 login::~login()
@@ -32,4 +34,9 @@ void login::on_btn_entrepot_clicked()
 void login::on_btn_need_clicked()
 {
     dialogLack->show();
+}
+
+void login::on_pushButton_clicked()
+{
+    dialogSale->show();
 }
