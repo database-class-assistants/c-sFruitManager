@@ -7,6 +7,8 @@
 #include "dialogwarehouse.h"
 #include "dialoglack.h"
 #include "dialogsale.h"
+#include "dialogsupplier.h"
+#include "dialogpurchase.h"
 
 namespace Ui {
 class login;
@@ -30,11 +32,17 @@ private slots:
 
     void on_pushButton_clicked();
 
+    void on_btn_supplier_clicked();
+
+    void on_btn_purchase_clicked();
+
 private:
     Ui::login *ui;
     DialogWarehouse *dialogWarehouse;
     DialogSale *dialogSale;
     DialogLack *dialogLack;
+    DialogSupplier *dialogSupplier;
+    DialogPurchase *dialogPurchase;
 };
 
 #endif // LOGIN_H

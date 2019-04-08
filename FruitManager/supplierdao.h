@@ -1,6 +1,6 @@
 #ifndef SUPPLIERDAO_H
 #define SUPPLIERDAO_H
-#include "supplier.h".h"
+#include "supplier.h"
 #include <vector>
 #include <QString>
 #include <QSqlQuery>

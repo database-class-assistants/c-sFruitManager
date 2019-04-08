@@ -33,8 +33,8 @@ void DialogSelect::on_btn_select_clicked()
     helper->connectDatabase();
 
     QSqlQuery query;
-    query.prepare("select (fruitName, fruitNum, fruitPrice, limited_number) from om_entrepot where fruitName = :name;");
-    query.bindValue(":fruitName", ui->le_select->text());
+    query.prepare("select fruitName, fruitNum, fruitPrice, limited_number from om_entrepot where fruitName = :name;");
+    query.bindValue(":name", ui->le_select->text());
     bool ret = query.exec();
     while(query.next()){
          qDebug() << query.value(0).toString() << "|"
