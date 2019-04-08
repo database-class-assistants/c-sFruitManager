@@ -44,7 +44,8 @@ SOURCES += \
     supplierdao.cpp \
     supplierdaoimp.cpp \
     dialogpurchase.cpp \
-    dialogsupplier.cpp
+    dialogsupplier.cpp \
+    dialogsaleitem.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -66,7 +67,8 @@ HEADERS += \
     supplierdao.h \
     supplierdaoimp.h \
     dialogpurchase.h \
-    dialogsupplier.h
+    dialogsupplier.h \
+    dialogsaleitem.h
 
 FORMS += \
     dialogwarehouse.ui \
@@ -78,4 +80,5 @@ FORMS += \
     dialoglack.ui \
     dialogsale.ui \
     dialogpurchase.ui \
-    dialogsupplier.ui
+    dialogsupplier.ui \
+    dialogsaleitem.ui

@@ -30,7 +30,7 @@
    <property name="geometry">
     <rect>
      <x>30</x>
-     <y>20</y>
+     <y>90</y>
      <width>331</width>
      <height>61</height>
     </rect>
@@ -54,6 +54,13 @@
      <widget class="QPushButton" name="btn_need">
       <property name="text">
        <string>缺货处理</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="pushButton">
+      <property name="text">
+       <string>销售</string>
       </property>
      </widget>
     </item>
