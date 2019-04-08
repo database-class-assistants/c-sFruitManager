@@ -4,3 +4,8 @@ SupplierDao::SupplierDao()
 {
 
 }
+
+SupplierDao::~SupplierDao()
+{
+
+}

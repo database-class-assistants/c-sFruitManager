@@ -21,7 +21,7 @@ void DBHelper::connectDatabase()
 void DBHelper::disconnectDatabase()
 {
     db.close();
-    db.removeDatabase("fruit");
+    db.removeDatabase("dbmos");
 }
 
 
