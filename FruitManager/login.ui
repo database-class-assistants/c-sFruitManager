@@ -43,6 +43,20 @@
       </property>
      </widget>
     </item>
+    <item row="2" column="0">
+     <widget class="QPushButton" name="pushButton">
+      <property name="text">
+       <string>销售</string>
+      </property>
+     </widget>
+    </item>
+    <item row="3" column="0">
+     <widget class="QPushButton" name="btn_supplier">
+      <property name="text">
+       <string>查看供应商</string>
+      </property>
+     </widget>
+    </item>
     <item row="1" column="0">
      <widget class="QPushButton" name="btn_need">
       <property name="text">
@@ -50,35 +64,27 @@
       </property>
      </widget>
     </item>
-    <item row="3" column="0">
-     <widget class="QPushButton" name="pushButton">
-      <property name="text">
-       <string>销售</string>
-      </property>
-     </widget>
-    </item>
     <item row="4" column="0">
-     <widget class="QPushButton" name="btn_supplier">
-      <property name="text">
-       <string>查看供应商</string>
-      </property>
-     </widget>
-    </item>
-    <item row="2" column="0">
-     <widget class="QPushButton" name="btn_purchase">
-      <property name="text">
-       <string>采购水果</string>
-      </property>
-     </widget>
-    </item>
-    <item row="5" column="0">
      <widget class="QPushButton" name="pushButton_2">
       <property name="text">
-       <string>管理采购订单</string>
+       <string>查看采购订单</string>
       </property>
      </widget>
     </item>
    </layout>
+  </widget>
+  <widget class="QPushButton" name="btn_purchase">
+   <property name="geometry">
+    <rect>
+     <x>300</x>
+     <y>230</y>
+     <width>99</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
   </widget>
  </widget>
  <resources/>

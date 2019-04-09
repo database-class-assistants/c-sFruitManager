@@ -12,13 +12,15 @@ login::login(QWidget *parent) :
     dialogLack = new DialogLack();
     dialogSale = new DialogSale();
     dialogSupplier = new DialogSupplier();
-    dialogPurchase  = new DialogPurchase();
+    dialogPurchaseOrder = new DialogPurchaseOrder();
+//    dialogPurchase  = new DialogPurchase();
 
     dialogWarehouse->setWindowModality(Qt::ApplicationModal);
     dialogLack->setWindowModality(Qt::ApplicationModal);
     dialogSale->setWindowModality(Qt::ApplicationModal);
     dialogSupplier->setWindowModality(Qt::ApplicationModal);
-    dialogPurchase->setWindowModality(Qt::ApplicationModal);
+    dialogPurchaseOrder->setWindowModality(Qt::ApplicationModal);
+//    dialogPurchase->setWindowModality(Qt::ApplicationModal);
 
 }
 
@@ -53,5 +55,10 @@ void login::on_btn_supplier_clicked()
 
 void login::on_btn_purchase_clicked()
 {
-    dialogPurchase->show();
+//    dialogPurchase->show();
+}
+
+void login::on_pushButton_2_clicked()
+{
+    dialogPurchaseOrder->show();
 }

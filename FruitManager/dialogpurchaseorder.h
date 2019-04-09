@@ -2,6 +2,7 @@
 #define DIALOGPURCHASEORDER_H
 
 #include <QDialog>
+#include <QSqlQueryModel>
 
 namespace Ui {
 class DialogPurchaseOrder;
@@ -13,10 +14,12 @@ class DialogPurchaseOrder : public QDialog
 
 public:
     explicit DialogPurchaseOrder(QWidget *parent = 0);
+    void showAllPurchaseOrder();
     ~DialogPurchaseOrder();
 
 private:
     Ui::DialogPurchaseOrder *ui;
+    QSqlQueryModel *model;
 };
 
 #endif // DIALOGPURCHASEORDER_H

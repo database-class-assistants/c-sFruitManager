@@ -33,7 +33,7 @@
     </rect>
    </property>
    <property name="text">
-    <string>一键补齐</string>
+    <string>采购</string>
    </property>
   </widget>
   <widget class="QPushButton" name="btn_flush">

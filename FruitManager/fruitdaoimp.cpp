@@ -57,7 +57,7 @@ bool FruitDaoImp::insertFruit(const Fruit &fruit) {
                   "values(:fruitName,:fruitPrice,:fruitNum);");
     query.bindValue(":fruitName",fruit.getFruitName());
     query.bindValue(":fruitPrice",fruit.getFruitPrice());
-    query.bindValue(":fruitNum",fruit.getFruitPrice());
+    query.bindValue(":fruitNum",fruit.getFruitNum());
     ret = query.exec();
 
     if(ret){qDebug()<<"DaoImp insert success";}

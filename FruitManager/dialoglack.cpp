@@ -7,6 +7,9 @@ DialogLack::DialogLack(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    dialogPurchase = new DialogPurchase();
+    dialogPurchase->setWindowModality(Qt::ApplicationModal);
+
     /**将数据模型与QTableView绑定**/
     model = new QSqlQueryModel(ui->tableView);/**将数据模型与QTableView绑定**/
     /**tableView列宽等宽自适应**/
@@ -30,20 +33,6 @@ void DialogLack::flush()
     DBHelper *helper =  DBHelper::getInstance();
     helper->connectDatabase();
 
-    QSqlQuery query;
-    bool ret = query.exec("select (fruitName, fruitNum, fruitPrice, limited_number) from om_entrepot;");
-    while(query.next()){
-         qDebug() << query.value(0).toString() << "|"
-                  << query.value(1).toString() << "|"
-                  << query.value(2).toString() << "|"
-                  << query.value(3).toString();
-    }
-    if(ret){
-        qDebug()<<"create tb_fruit success";
-    } else {
-        qDebug()<<query.lastError().text();
-    }
-
     model->setQuery("select fruitName as '水果名',"
                     "fruitNum as '现存数量/kg',"
                     "fruitPrice as '单价￥/500g', "
@@ -52,4 +41,9 @@ void DialogLack::flush()
     ui->tableView->setModel(model);
 
     helper->disconnectDatabase();
+}
+
+void DialogLack::on_btn_buy_clicked()
+{
+    dialogPurchase->show();
 }

@@ -8,6 +8,9 @@
 #include <QMessageBox>
 #include <QDateTime>
 #include <QStringList>
+#include "fruit.h"
+#include "fruitdaoimp.h"
+#include "fruitdao.h"
 
 DialogPurchase::DialogPurchase(QWidget *parent) :
     QWidget(parent),
@@ -150,17 +153,49 @@ void DialogPurchase::on_pushButton_clicked()
     double fruitNum;
     double fruitPrice;
     double limited_number;
-    query.prepare("select * from om_ontrepot where fruitName = :fruitName;");
-    query.bindValue(":fruitNamE", fruitName);
+    query.prepare("select * from om_entrepot where fruitName = :fruitName;");
+    query.bindValue(":fruitName", fruitName);
     query.exec();
 
     if(query.size() == 0){
-        while(query.next()){
-
+        fruitNum = num;
+        fruitPrice = price;
+        limited_number = 0;
+        Fruit fruit(fruitName,fruitPrice,fruitNum,limited_number);
+        FruitDao *fd = new FruitDaoImp();
+        bool ret = fd->insertFruit(fruit);
+        if(ret)
+        {
+            qDebug()<<"插入成功";
         }
+        else
+        {
+            qDebug()<<"插入失败";
+        }
+        delete(fd);
+        fd=NULL;
     } else {
+        while(query.next()){
+            fruitNum = query.value(2).toString().toDouble() + num;
+            fruitPrice = query.value(3).toString().toDouble();
+            limited_number = query.value(4).toString().toDouble();
 
+            Fruit fruit(fruitName,fruitPrice,fruitNum,limited_number);
+            FruitDao *fd = new FruitDaoImp();
+            bool ret = fd->updateFruit(fruit, fruitName);
+            if(ret)
+            {
+                qDebug()<<"修改成功";
+            }
+            else
+            {
+                qDebug()<<"修改失败";
+            }
+            delete(fd);
+            fd=NULL;
+        }
     }
+
 
     helper->disconnectDatabase();
 

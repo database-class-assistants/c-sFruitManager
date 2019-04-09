@@ -5,6 +5,7 @@
 #include <QSqlQueryModel>
 #include "dbhelper.h"
 #include "fruitdaoimp.h"
+#include <dialogpurchase.h>
 
 namespace Ui {
 class DialogLack;
@@ -21,9 +22,12 @@ public:
 private slots:
     void on_btn_flush_clicked();
 
+    void on_btn_buy_clicked();
+
 private:
     Ui::DialogLack *ui;
     QSqlQueryModel *model;
+    DialogPurchase *dialogPurchase;
 
     void flush();
 };

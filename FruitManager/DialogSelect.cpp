@@ -5,10 +5,15 @@
 #include <QDebug>
 #include <QMessageBox>
 #include <QHeaderView>
+#include <QTextCodec>
 DialogSelect::DialogSelect(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::DialogSelect)
 {
+//    QTextCodec::setCodecForTr(QTextCodec::codecForName("utf8"));
+//    QTextCodec::setCodecForCStrings(QTextCodec::codecForLocale());
+//    if(!createConnection())
+//           return 1;
     ui->setupUi(this);
 
     model = new QSqlQueryModel(ui->tableView);
