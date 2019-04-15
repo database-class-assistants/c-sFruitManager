@@ -198,5 +198,6 @@ void DialogPurchase::on_pushButton_clicked()
 
 
     helper->disconnectDatabase();
+    this->close();
 
 }
