@@ -1,6 +1,7 @@
 #include "login.h"
 #include "ui_login.h"
 #include <QDebug>
+#include "mainwindow.h"
 
 login::login(QWidget *parent) :
     QWidget(parent),
@@ -20,6 +21,8 @@ login::login(QWidget *parent) :
     dialogSale->setWindowModality(Qt::ApplicationModal);
     dialogSupplier->setWindowModality(Qt::ApplicationModal);
     dialogPurchaseOrder->setWindowModality(Qt::ApplicationModal);
+
+
 //    dialogPurchase->setWindowModality(Qt::ApplicationModal);
 
 }
@@ -31,6 +34,16 @@ login::~login()
 void login::onUserLogin(const User &user){
     qDebug()<<user.getName();
     ui->le_username->setText(user.getName());
+    QString permission = user.getPermission();
+    if(permission == "saler"){
+        ui->btn_supplier->hide();
+        ui->pushButton_2->hide();
+        ui->btn_need->hide();
+    }
+    if(permission == "purchaser"){
+        ui->pushButton->hide();
+        ui->btn_entrepot->hide();
+    }
 }
 
 void login::on_btn_entrepot_clicked()
@@ -61,4 +74,9 @@ void login::on_btn_purchase_clicked()
 void login::on_pushButton_2_clicked()
 {
     dialogPurchaseOrder->show();
+}
+
+void login::on_pushButton_3_clicked()
+{
+    emit userLogout();
 }

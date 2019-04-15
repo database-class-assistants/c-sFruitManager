@@ -23,6 +23,8 @@ public:
     explicit login(QWidget *parent = 0);
 
     ~login();
+signals:
+    void userLogout();
 
 private slots:
     void onUserLogin(const User &user);
@@ -38,6 +40,8 @@ private slots:
     void on_btn_purchase_clicked();
 
     void on_pushButton_2_clicked();
+
+    void on_pushButton_3_clicked();
 
 private:
     Ui::login *ui;

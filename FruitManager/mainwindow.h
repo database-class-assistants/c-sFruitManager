@@ -20,6 +20,7 @@ public:
 
 private slots:
     void on_login_clicked();
+    void onUserLogout();
 
 signals:
     void userLogin(const User &user);
