@@ -52,12 +52,15 @@ void DialogSelect::on_btn_select_clicked()
         qDebug()<<query.lastError().text();
     }
 
-    model->setQuery("select fruitName as '水果名',"
-                    "fruitNum as '数量/kg',"
-                    "fruitPrice as '单价￥/500g', "
-                    "limited_number as '最低数量/kg'  from om_entrepot where fruitName = " +
-                    ui->le_select->text() +
-                    ";");
+
+    QSqlQuery _query;
+    _query.prepare("select fruitName as '水果名',"
+                   "fruitNum as '数量/kg',"
+                   "fruitPrice as '单价￥/500g', "
+                   "limited_number as '最低数量/kg'  from om_entrepot where fruitName = :_fruitname");
+    _query.bindValue(":_fruitname", ui->le_select->text());
+    _query.exec();
+    model->setQuery(_query);
 
     ui->tableView->setModel(model);
 
