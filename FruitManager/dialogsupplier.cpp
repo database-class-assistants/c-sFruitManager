@@ -28,6 +28,7 @@ DialogSupplier::DialogSupplier(QWidget *parent) :
 
     ui->tableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 
+    helper->disconnectDatabase();
 
 //    showAllSuppliers();
 
@@ -40,8 +41,8 @@ DialogSupplier::~DialogSupplier()
 
 void DialogSupplier::showAllSuppliers()
 {
-    DBHelper *helper =  DBHelper::getInstance();
-    helper->connectDatabase();
+//    DBHelper *helper =  DBHelper::getInstance();
+//    helper->connectDatabase();
 
 //    model->setQuery("select name as '供应商',"
 //                    "fruitName as '水果名',"
@@ -51,13 +52,13 @@ void DialogSupplier::showAllSuppliers()
 //                    "telephone as '电话' from om_supplier;");
 //    ui->tableView->setModel(model);
 
-    helper->disconnectDatabase();
+//    helper->disconnectDatabase();
 }
 
 
 void DialogSupplier::on_pushButton_5_clicked()
 {
-
+       helper->connectDatabase();
     int rowNum = model->rowCount(); //获得表的行数
 //    int id = 10;
     model->insertRow(rowNum); //添加一行
@@ -115,6 +116,7 @@ void DialogSupplier::on_pushButton_5_clicked()
 
 //    helper->disconnectDatabase();
 //    showAllSuppliers();
+    helper->disconnectDatabase();
 }
 
 void DialogSupplier::on_btn_flush_clicked()
@@ -125,6 +127,7 @@ void DialogSupplier::on_btn_flush_clicked()
 void DialogSupplier::on_pushButton_2_clicked()
 {
     //获取选中的行
+    helper->connectDatabase();
     int curRow = ui->tableView->currentIndex().row();
 
     //删除该行
@@ -138,10 +141,12 @@ void DialogSupplier::on_pushButton_2_clicked()
            model->revertAll(); //如果不删除，则撤销
         }
         else model->submitAll(); //否则提交，在数据库中删除该行
+       helper->disconnectDatabase();
 }
 
 void DialogSupplier::on_pushButton_6_clicked()
 {
+    helper->connectDatabase();
     model->database().transaction(); //开始事务操作
     if (model->submitAll()) {
         model->database().commit(); //提交
@@ -149,19 +154,23 @@ void DialogSupplier::on_pushButton_6_clicked()
         model->database().rollback(); //回滚
         QMessageBox::warning(this, tr("tableModel"),tr("数据库错误: %1").arg(model->lastError().text()));
     }
+    helper->disconnectDatabase();
 }
 
 void DialogSupplier::on_btn_select_clicked()
 {
+    helper->connectDatabase();
     QString name = ui->lineEdit->text();
     //根据供应商名进行筛选
     model->setFilter(QString("name = '%1'").arg(name));
     //显示结果
     model->select();
+    helper->disconnectDatabase();
 }
 
 void DialogSupplier::on_pushButton_3_clicked()
 {
+    helper->connectDatabase();
     model->setTable("om_supplier");   //重新关联表
     model->select();   //这样才能再次显示整个表的内容
 }

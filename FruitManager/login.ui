@@ -36,13 +36,6 @@
     </rect>
    </property>
    <layout class="QGridLayout" name="gridLayout_2">
-    <item row="0" column="0">
-     <widget class="QPushButton" name="btn_entrepot">
-      <property name="text">
-       <string>查看库存</string>
-      </property>
-     </widget>
-    </item>
     <item row="2" column="0">
      <widget class="QPushButton" name="pushButton">
       <property name="text">
@@ -50,24 +43,31 @@
       </property>
      </widget>
     </item>
-    <item row="3" column="0">
+    <item row="4" column="0">
      <widget class="QPushButton" name="btn_supplier">
       <property name="text">
        <string>查看供应商</string>
       </property>
      </widget>
     </item>
-    <item row="1" column="0">
-     <widget class="QPushButton" name="btn_need">
+    <item row="0" column="0">
+     <widget class="QPushButton" name="btn_entrepot">
       <property name="text">
-       <string>缺货处理</string>
+       <string>查看库存</string>
       </property>
      </widget>
     </item>
-    <item row="4" column="0">
+    <item row="5" column="0">
      <widget class="QPushButton" name="pushButton_2">
       <property name="text">
        <string>查看采购订单</string>
+      </property>
+     </widget>
+    </item>
+    <item row="3" column="0">
+     <widget class="QPushButton" name="btn_need">
+      <property name="text">
+       <string>缺货处理</string>
       </property>
      </widget>
     </item>
