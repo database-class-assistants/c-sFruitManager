@@ -110,6 +110,26 @@ void DialogWarehouse::on_bit_add_clicked()
         return;
     }
 
+    DBHelper *helper =  DBHelper::getInstance();
+    helper->connectDatabase();
+    QSqlQuery query;
+    query.exec("select * from om_entrepot where fruitName = :fruitname;");
+    query.bindValue(":fruitname", ui->le_name->text());
+    bool ret = query.exec();
+    if(ret){
+        qDebug()<<"create tb_fruit success";
+    } else {
+        qDebug()<<query.lastError().text();
+    }
+    if(query.size()!=0) {
+        qDebug()<<"fruitName : " + ui->le_name->text() + " is existed." ;
+        QMessageBox::information(this,"警告","水果名 : "+ui->le_name->text()+"已存在");
+        return;
+    }
+
+    helper->disconnectDatabase();
+
+
     QString name = ui->le_name->text();
     double price = ui->le_price->text().toDouble();
     double num = ui->le_num->text().toDouble();

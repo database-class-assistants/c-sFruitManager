@@ -43,6 +43,8 @@ void DialogSaleItem::on_btn_comfirm_clicked()
     QString fruitName;
     double fruitNum;
     double fruitExistedNum;
+    double fruitLimitedNum;
+    double fruitAfterNum;
     double fruitPrice;
     int fruit_id;
     QString date;
@@ -77,14 +79,12 @@ void DialogSaleItem::on_btn_comfirm_clicked()
     else{qDebug()<<query.lastError().text();}
 
     while(query.next()) {
-        qDebug() << " --- "
-                 << query.value(0).toString() << " " << fruitName
+        qDebug() << " --------- \n"
+                 << query.value(0).toString() << " " << fruitName << "\n"
                  << "库存 " << query.value(1).toString() << "kg";
         fruit_id = query.value(0).toString().toInt();
         fruitExistedNum = query.value(1).toString().toDouble();
     }
-
-
     // qDebug() << fruit_id << " " << fruitName << "库存 " << fruitExistedNum << "kg";
     // fruitExistedNum = query.value(0).toString().toDouble();
 
@@ -94,7 +94,9 @@ void DialogSaleItem::on_btn_comfirm_clicked()
                 + QString::number(fruitNum, 10, 2) + "kg.";
         qDebug() << info;
         QMessageBox::information(this,"警告",info);
+        return;
     }
+    fruitAfterNum = fruitExistedNum - fruitNum;
 
     query.prepare("insert into om_sale_order(fruit_id,fruit_name,number, price, date, is_update)"
                   "values(:fruit_id, :fruit_name, :number, :price, :date, 1);");
@@ -109,6 +111,23 @@ void DialogSaleItem::on_btn_comfirm_clicked()
     } else {
         qDebug()<<"添加销售记录失败: "<<query.lastError().text();
     }
+
+    // 同步到库存信息
+    query.clear();
+    query.prepare("update om_entrepot "
+                  "set fruitNum = :fruitNum, "
+                  "fruitPrice = :fruitPrice "
+                  "where fruitName = :fruit_name");
+    query.bindValue(":fruitNum",fruitAfterNum);
+    query.bindValue(":fruitPrice",fruitPrice);
+    query.bindValue(":fruit_name",fruitName);
+    ret = query.exec();
+    if(ret){
+        qDebug()<<"同步销售记录成功";
+    } else {
+        qDebug()<<"同步销售记录失败: "<<query.lastError().text();
+    }
+
 
     helper->disconnectDatabase();
     this->close();
