@@ -29,10 +29,15 @@
    <property name="geometry">
     <rect>
      <x>80</x>
-     <y>160</y>
+     <y>170</y>
      <width>161</width>
      <height>32</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>13</pointsize>
+    </font>
    </property>
    <property name="orientation">
     <enum>Qt::Horizontal</enum>
@@ -45,9 +50,9 @@
    <property name="geometry">
     <rect>
      <x>60</x>
-     <y>20</y>
+     <y>10</y>
      <width>197</width>
-     <height>136</height>
+     <height>151</height>
     </rect>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout">
@@ -55,13 +60,24 @@
      <layout class="QHBoxLayout" name="horizontalLayout_2">
       <item>
        <widget class="QLabel" name="label_2">
+        <property name="font">
+         <font>
+          <pointsize>13</pointsize>
+         </font>
+        </property>
         <property name="text">
          <string>名称：</string>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QLineEdit" name="le_name_old"/>
+       <widget class="QLineEdit" name="le_name_old">
+        <property name="font">
+         <font>
+          <pointsize>13</pointsize>
+         </font>
+        </property>
+       </widget>
       </item>
      </layout>
     </item>
@@ -69,13 +85,24 @@
      <layout class="QHBoxLayout" name="horizontalLayout_3">
       <item>
        <widget class="QLabel" name="label_3">
+        <property name="font">
+         <font>
+          <pointsize>13</pointsize>
+         </font>
+        </property>
         <property name="text">
          <string>单价：</string>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QLineEdit" name="le_price_new"/>
+       <widget class="QLineEdit" name="le_price_new">
+        <property name="font">
+         <font>
+          <pointsize>13</pointsize>
+         </font>
+        </property>
+       </widget>
       </item>
      </layout>
     </item>
@@ -83,13 +110,24 @@
      <layout class="QHBoxLayout" name="horizontalLayout_4">
       <item>
        <widget class="QLabel" name="label_4">
+        <property name="font">
+         <font>
+          <pointsize>13</pointsize>
+         </font>
+        </property>
         <property name="text">
          <string>数量：</string>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QLineEdit" name="le_num_new"/>
+       <widget class="QLineEdit" name="le_num_new">
+        <property name="font">
+         <font>
+          <pointsize>13</pointsize>
+         </font>
+        </property>
+       </widget>
       </item>
      </layout>
     </item>
@@ -97,13 +135,24 @@
      <layout class="QHBoxLayout" name="horizontalLayout">
       <item>
        <widget class="QLabel" name="label">
+        <property name="font">
+         <font>
+          <pointsize>13</pointsize>
+         </font>
+        </property>
         <property name="text">
          <string>新名称：</string>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QLineEdit" name="le_newname"/>
+       <widget class="QLineEdit" name="le_newname">
+        <property name="font">
+         <font>
+          <pointsize>13</pointsize>
+         </font>
+        </property>
+       </widget>
       </item>
      </layout>
     </item>
@@ -111,13 +160,24 @@
      <layout class="QHBoxLayout" name="horizontalLayout_5">
       <item>
        <widget class="QLabel" name="lb_limited">
+        <property name="font">
+         <font>
+          <pointsize>13</pointsize>
+         </font>
+        </property>
         <property name="text">
          <string>最低数量</string>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QLineEdit" name="le_limited"/>
+       <widget class="QLineEdit" name="le_limited">
+        <property name="font">
+         <font>
+          <pointsize>13</pointsize>
+         </font>
+        </property>
+       </widget>
       </item>
      </layout>
     </item>

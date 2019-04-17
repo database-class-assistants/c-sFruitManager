@@ -49,6 +49,11 @@
    <layout class="QHBoxLayout" name="horizontalLayout_4">
     <item>
      <widget class="QPushButton" name="btn_flush">
+      <property name="font">
+       <font>
+        <pointsize>13</pointsize>
+       </font>
+      </property>
       <property name="text">
        <string>刷新</string>
       </property>
@@ -56,6 +61,11 @@
     </item>
     <item>
      <widget class="QPushButton" name="btn_add">
+      <property name="font">
+       <font>
+        <pointsize>13</pointsize>
+       </font>
+      </property>
       <property name="text">
        <string>售出</string>
       </property>
@@ -71,6 +81,11 @@
      <width>521</width>
      <height>241</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>13</pointsize>
+    </font>
    </property>
   </widget>
  </widget>

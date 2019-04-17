@@ -22,6 +22,11 @@
      <height>231</height>
     </rect>
    </property>
+   <property name="font">
+    <font>
+     <pointsize>13</pointsize>
+    </font>
+   </property>
   </widget>
   <widget class="QPushButton" name="btn_buy">
    <property name="geometry">
@@ -31,6 +36,11 @@
      <width>91</width>
      <height>31</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>13</pointsize>
+    </font>
    </property>
    <property name="text">
     <string>采购</string>
@@ -44,6 +54,11 @@
      <width>91</width>
      <height>31</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>13</pointsize>
+    </font>
    </property>
    <property name="text">
     <string>刷新</string>
