@@ -28,9 +28,9 @@ DialogSelect::~DialogSelect()
 
 void DialogSelect::on_btn_select_clicked()
 {
-    if(ui->le_select->text().isEmpty() )
+    if(ui->le_select->text().isEmpty() && ui->le_num->text().isEmpty())
     {
-        QMessageBox::critical(this,"警告","不允许为空");
+        QMessageBox::critical(this,"警告","不允许全为空");
         return;
     }
 
@@ -38,8 +38,19 @@ void DialogSelect::on_btn_select_clicked()
     helper->connectDatabase();
 
     QSqlQuery query;
-    query.prepare("select fruitName, fruitNum, fruitPrice, limited_number from om_entrepot where fruitName = :name;");
-    query.bindValue(":name", ui->le_select->text());
+    if(!ui->le_select->text().isEmpty() && !ui->le_num->text().isEmpty())
+    {
+        query.prepare("select fruitName, fruitNum, fruitPrice, limited_number from om_entrepot where fruitName = :name and fruitNum >= :_fruitNum;");
+        query.bindValue(":name", ui->le_select->text());
+        query.bindValue(":_fruitNum", ui->le_num->text().toDouble());
+    } else if(ui->le_num->text().isEmpty()) {
+        query.prepare("select fruitName, fruitNum, fruitPrice, limited_number from om_entrepot where fruitName = :name;");
+        query.bindValue(":name", ui->le_select->text());
+    } else {
+        query.prepare("select fruitName, fruitNum, fruitPrice, limited_number from om_entrepot where fruitNum >= :_fruitNum;");
+        query.bindValue(":_fruitNum", ui->le_num->text().toDouble());
+    }
+
     bool ret = query.exec();
     while(query.next()){
          qDebug() << query.value(0).toString() << "|"
@@ -54,11 +65,34 @@ void DialogSelect::on_btn_select_clicked()
 
 
     QSqlQuery _query;
-    _query.prepare("select fruitName as '水果名',"
-                   "fruitNum as '数量/kg',"
-                   "fruitPrice as '单价￥/500g', "
-                   "limited_number as '最低数量/kg'  from om_entrepot where fruitName = :_fruitname");
-    _query.bindValue(":_fruitname", ui->le_select->text());
+    if(!ui->le_select->text().isEmpty() && !ui->le_num->text().isEmpty())
+    {
+        _query.prepare("select fruitName as '水果名',"
+                       "fruitNum as '数量/kg',"
+                       "fruitPrice as '单价￥/500g', "
+                       "limited_number as '最低数量/kg'  from om_entrepot where fruitName = :_fruitname and fruitNum >= :_fruitNum;");
+        _query.bindValue(":_fruitname", ui->le_select->text());
+        _query.bindValue(":_fruitNum", ui->le_select->text());
+    } else if(ui->le_num->text().isEmpty()) {
+        _query.prepare("select fruitName as '水果名',"
+                       "fruitNum as '数量/kg',"
+                       "fruitPrice as '单价￥/500g', "
+                       "limited_number as '最低数量/kg'  from om_entrepot where fruitName = :_fruitname;");
+        _query.bindValue(":_fruitname", ui->le_select->text());
+    } else {
+        _query.prepare("select fruitName as '水果名',"
+                       "fruitNum as '数量/kg',"
+                       "fruitPrice as '单价￥/500g', "
+                       "limited_number as '最低数量/kg'  from om_entrepot where fruitNum >= :_fruitNum;");
+        _query.bindValue(":_fruitNum", ui->le_select->text());
+    }
+
+//    _query.prepare("select fruitName as '水果名',"
+//                   "fruitNum as '数量/kg',"
+//                   "fruitPrice as '单价￥/500g', "
+//                   "limited_number as '最低数量/kg'  from om_entrepot where fruitName = :_fruitname and fruitNum >= :_fruitNum");
+//    _query.bindValue(":_fruitname", ui->le_select->text());
+//    _query.bindValue(":_fruitNum", ui->le_select->text());
     _query.exec();
     model->setQuery(_query);
 

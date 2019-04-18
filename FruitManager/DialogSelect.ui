@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>540</width>
-    <height>300</height>
+    <width>579</width>
+    <height>346</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -15,9 +15,21 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
-    <layout class="QHBoxLayout" name="horizontalLayout" stretch="1,2,1">
+    <layout class="QHBoxLayout" name="horizontalLayout" stretch="0,2,1">
      <item>
-      <widget class="QComboBox" name="comboBox"/>
+      <widget class="QLabel" name="lb_name">
+       <property name="font">
+        <font>
+         <pointsize>14</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>水果名：</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
      </item>
      <item>
       <widget class="QLineEdit" name="le_select">
@@ -39,6 +51,28 @@
         <string>查询</string>
        </property>
       </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_2">
+     <item>
+      <widget class="QLabel" name="lb_num">
+       <property name="font">
+        <font>
+         <pointsize>14</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>最少数量（kg）：</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="le_num"/>
      </item>
     </layout>
    </item>
