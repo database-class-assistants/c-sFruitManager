@@ -54,3 +54,8 @@ void DialogPurchaseOrder::showAllPurchaseOrder(){
 
         helper->disconnectDatabase();
 }
+
+void DialogPurchaseOrder::on_btn_flush_clicked()
+{
+    showAllPurchaseOrder();
+}

@@ -8,6 +8,7 @@
 #include <QMessageBox>
 #include <QDateTime>
 #include <QStringList>
+#include <QModelIndex>
 #include "fruit.h"
 #include "fruitdaoimp.h"
 #include "fruitdao.h"
@@ -17,6 +18,9 @@ DialogPurchase::DialogPurchase(QWidget *parent) :
     ui(new Ui::DialogPurchase)
 {
     ui->setupUi(this);
+    model = new QSqlQueryModel(ui->tableView);
+    helper =DBHelper::getInstance();
+
 }
 
 DialogPurchase::~DialogPurchase()
@@ -33,7 +37,7 @@ void DialogPurchase::on_le_fruit_name_textChanged(const QString &arg1)
 
 void DialogPurchase::on_cb_supplier_activated(const QString &arg1)
 {
-    DBHelper *helper = DBHelper::getInstance();
+//    DBHelper *helper = DBHelper::getInstance();
     helper->connectDatabase();
     QSqlQuery query;
     QString supplier = ui->cb_supplier->currentText();
@@ -52,7 +56,7 @@ void DialogPurchase::on_cb_supplier_activated(const QString &arg1)
 
 void DialogPurchase::on_le_fruit_name_editingFinished()
 {
-    DBHelper *helper = DBHelper::getInstance();
+//    DBHelper *helper = DBHelper::getInstance();
     helper->connectDatabase();
 
     QString fruitName ;
@@ -98,9 +102,12 @@ void DialogPurchase::on_pushButton_clicked()
         return;
     }
 
-    DBHelper *helper = DBHelper::getInstance();
+//    DBHelper *helper = DBHelper::getInstance();
     helper->connectDatabase();
     QSqlQuery query;
+
+    query.exec("START TRANSACTION");
+
 
     supplierName = ui->cb_supplier->currentText();
     fruitName = ui->le_fruit_name->text();
@@ -161,9 +168,12 @@ void DialogPurchase::on_pushButton_clicked()
         fruitNum = num;
         fruitPrice = price;
         limited_number = 0;
-        Fruit fruit(fruitName,fruitPrice,fruitNum,limited_number);
-        FruitDao *fd = new FruitDaoImp();
-        bool ret = fd->insertFruit(fruit);
+        query.prepare("insert into om_entrepot(fruitName,fruitPrice,fruitNum)"
+                      "values(:fruitName,:fruitPrice,:fruitNum);");
+        query.bindValue(":fruitName",fruitName);
+        query.bindValue(":fruitPrice",fruitPrice);
+        query.bindValue(":fruitNum",fruitNum);
+        ret = query.exec();
         if(ret)
         {
             qDebug()<<"插入成功";
@@ -172,17 +182,24 @@ void DialogPurchase::on_pushButton_clicked()
         {
             qDebug()<<"插入失败";
         }
-        delete(fd);
-        fd=NULL;
     } else {
         while(query.next()){
             fruitNum = query.value(2).toString().toDouble() + num;
             fruitPrice = query.value(3).toString().toDouble();
             limited_number = query.value(4).toString().toDouble();
 
-            Fruit fruit(fruitName,fruitPrice,fruitNum,limited_number);
-            FruitDao *fd = new FruitDaoImp();
-            bool ret = fd->updateFruit(fruit, fruitName);
+            query.prepare("update om_entrepot "
+                          "set fruitName = :fruitName, "
+                          "fruitPrice = :fruitPrice, "
+                          "fruitNum = :fruitNum, "
+                          "limited_number = :limitedNum "
+                          "where fruitName = :oldname");
+            query.bindValue(":fruitName",fruitName);
+            query.bindValue(":fruitPrice",fruitPrice);
+            query.bindValue(":fruitNum",fruitNum);
+            query.bindValue(":limitedNum",limited_number);
+            query.bindValue(":oldname",fruitName);
+            ret = query.exec();
             if(ret)
             {
                 qDebug()<<"修改成功";
@@ -191,13 +208,35 @@ void DialogPurchase::on_pushButton_clicked()
             {
                 qDebug()<<"修改失败";
             }
-            delete(fd);
-            fd=NULL;
         }
     }
+//    helper->disconnectDatabase();
+//    helper->connectDatabase();
+    model->setQuery("select fruit_name as '水果名',"
+                    "supplier_name as '供应商',"
+                    "number as '数量/kg',"
+                    "price as '最新单价￥/500g', "
+                    "date as '日期' from om_purchase_order;");
+    ui->tableView->setModel(model);
+    commit_flag = true;
 
+//    query.exec("COMMIT");
 
+//    helper->disconnectDatabase();
+//    this->close();
+
+}
+
+void DialogPurchase::on_btn_commit_clicked()
+{
+//    DBHelper *helper = DBHelper::getInstance();
+//    helper->connectDatabase();
+    if(!commit_flag){
+        QMessageBox::critical(this,"警告","请先进行采购");
+        return;
+    }
+    QSqlQuery query;
+    query.exec("COMMIT");
+    commit_flag = false;
     helper->disconnectDatabase();
-    this->close();
-
 }

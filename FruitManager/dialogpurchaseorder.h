@@ -17,6 +17,9 @@ public:
     void showAllPurchaseOrder();
     ~DialogPurchaseOrder();
 
+private slots:
+    void on_btn_flush_clicked();
+
 private:
     Ui::DialogPurchaseOrder *ui;
     QSqlQueryModel *model;

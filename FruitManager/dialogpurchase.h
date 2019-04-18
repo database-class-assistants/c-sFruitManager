@@ -2,6 +2,8 @@
 #define DIALOGPURCHASE_H
 
 #include <QWidget>
+#include <QSqlQueryModel>
+#include <dbhelper.h>
 
 namespace Ui {
 class DialogPurchase;
@@ -24,8 +26,13 @@ private slots:
 
     void on_pushButton_clicked();
 
+    void on_btn_commit_clicked();
+
 private:
     Ui::DialogPurchase *ui;
+    QSqlQueryModel *model;
+    DBHelper *helper;
+    bool commit_flag = false;
 };
 
 #endif // DIALOGPURCHASE_H
